@@ -1,0 +1,12 @@
+{
+  "name": "control-skills",
+  "description": "Control systems engineering skills for Claude Code",
+  "plugins": [
+    {
+      "name": "control-skills",
+      "description": "SLICOT routines, control theory, and PID tuning skills",
+      "version": "1.0.0",
+      "path": "."
+    }
+  ]
+}
