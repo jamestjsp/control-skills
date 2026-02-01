@@ -14,6 +14,14 @@ Routines follow `XX##YY` pattern:
 - `##` - 2-digit subcategory number
 - `YY` - variant suffix (MD=real, MZ=complex, ND=multi-input, etc.)
 
+## Looking Up Routine Details
+
+To get detailed documentation for any SLICOT routine, use Python's help function:
+```python
+import slicot
+help(slicot.sb02md)  # Full docstring with params, returns, examples
+```
+
 ## Category Quick Reference
 
 | Prefix | Domain | Key Functions |
@@ -173,8 +181,7 @@ Common patterns in the 2-digit number:
 
 ## Resources
 
-- **API Docs:** https://slicot.readthedocs.io/en/latest/api/
-- **Python docstrings:** `help(slicot.routine_name)` or `routine_name.__doc__`
+- **Routine Details:** Use `help(slicot.routine_name)` in Python to get full docstring with parameters, return values, and examples
 - **Tests:** `tests/python/test_*.py` (usage examples)
 
 See `references/` for detailed category info, workflows, and quick reference tables.
