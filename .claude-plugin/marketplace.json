@@ -6,7 +6,7 @@
   "plugins": [
     {
       "name": "control-skills",
-      "source": ".",
+      "source": "./",
       "description": "SLICOT routines, control theory, and PID tuning skills",
       "version": "1.0.0"
     }
