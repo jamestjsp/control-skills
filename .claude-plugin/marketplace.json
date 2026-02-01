@@ -8,10 +8,24 @@
   },
   "plugins": [
     {
-      "name": "control-skills",
-      "description": "SLICOT routines, control theory, and PID tuning skills",
+      "name": "slicot-control",
+      "description": "SLICOT routine lookup and usage guidance",
       "version": "1.0.0",
-      "source": "./plugins/control-skills",
+      "source": "./plugins/slicot-control",
+      "category": "development"
+    },
+    {
+      "name": "control-theory",
+      "description": "LTI systems, controller design, discretization",
+      "version": "1.0.0",
+      "source": "./plugins/control-theory",
+      "category": "development"
+    },
+    {
+      "name": "pid-loop-tuning",
+      "description": "Process identification and lambda tuning",
+      "version": "1.0.0",
+      "source": "./plugins/pid-loop-tuning",
       "category": "development"
     }
   ]

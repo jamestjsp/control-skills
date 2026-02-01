@@ -1,9 +1,0 @@
-{
-  "name": "control-skills",
-  "description": "Control systems skills: SLICOT routines, control theory, and PID tuning",
-  "version": "1.0.0",
-  "author": {
-    "name": "josephj"
-  },
-  "repository": "https://github.com/josephj/control-skills"
-}

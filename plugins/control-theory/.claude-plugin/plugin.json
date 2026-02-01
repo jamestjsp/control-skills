@@ -1,0 +1,5 @@
+{
+  "name": "control-theory",
+  "description": "LTI systems, controller design, discretization",
+  "version": "1.0.0"
+}
