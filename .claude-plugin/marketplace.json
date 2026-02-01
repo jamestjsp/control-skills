@@ -1,17 +1,18 @@
 {
-  "name": "control-skills",
+  "name": "control-skills-marketplace",
+  "version": "1.0.0",
+  "description": "Control systems engineering skills for Claude Code",
   "owner": {
-    "name": "jamestjsp"
+    "name": "jamestjsp",
+    "email": "jamestjsp@users.noreply.github.com"
   },
   "plugins": [
     {
       "name": "control-skills",
-      "source": {
-        "type": "local",
-        "path": "./"
-      },
       "description": "SLICOT routines, control theory, and PID tuning skills",
-      "version": "1.0.0"
+      "version": "1.0.0",
+      "source": "./plugins/control-skills",
+      "category": "development"
     }
   ]
 }
