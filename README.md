@@ -1,39 +1,57 @@
 # control-skills
 
-Claude Code plugin for control systems engineering.
+Claude Code plugin for control systems engineering with SLICOT.
 
 ## Skills Included
 
 | Skill | Description |
 |-------|-------------|
-| `/slicot-control` | SLICOT routine lookup and usage guidance |
-| `/control-theory` | LTI systems, controller design, discretization |
-| `/pid-loop-tuning` | Process identification and lambda tuning |
+| `slicot-control` | SLICOT routine lookup and usage guidance |
+| `control-theory` | LTI systems, controller design, discretization |
+| `pid-loop-tuning` | Process identification and lambda tuning |
 
 ## Installation
 
-```bash
-/plugin marketplace add https://github.com/josephj/control-skills
+### Step 1: Add the marketplace
+
+```
+/plugin marketplace add https://github.com/jamestjsp/control-skills
+```
+
+### Step 2: Install the plugin
+
+```
 /plugin install control-skills
 ```
 
-Or load directly:
+### Alternative: Load directly
 
 ```bash
 claude --plugin-dir /path/to/control-skills
 ```
 
-## Requirements
-
-- `slicot` package (C11 rewrite, NOT slycot)
-- numpy
-
 ## Usage
 
-Invoke skills with `/control-skills:<skill-name>`:
+After installation, invoke skills with:
 
 ```
 /control-skills:slicot-control   # Find SLICOT routines
 /control-skills:control-theory   # LTI system design
 /control-skills:pid-loop-tuning  # PID tuning methodology
 ```
+
+## Managing the Plugin
+
+```
+/plugin                              # Open plugin manager UI
+/plugin marketplace list             # List added marketplaces
+/plugin disable control-skills       # Disable without uninstalling
+/plugin enable control-skills        # Re-enable
+/plugin uninstall control-skills     # Remove plugin
+/plugin marketplace remove <name>    # Remove marketplace
+```
+
+## Requirements
+
+- `slicot` package (C11 rewrite, NOT slycot)
+- numpy
