@@ -53,5 +53,22 @@ After installation, invoke skills with:
 
 ## Requirements
 
-- `slicot` package (C11 rewrite, NOT slycot)
-- numpy
+### slicot package
+
+**Important:** This uses `slicot` (C11 rewrite), NOT `slycot` (Fortran wrapper). They have different APIs.
+
+```bash
+# Using uv
+uv add slicot
+
+# Using pip
+pip install slicot
+```
+
+### numpy
+
+```bash
+uv add numpy
+# or
+pip install numpy
+```
