@@ -1,12 +1,14 @@
 {
   "name": "control-skills",
-  "description": "Control systems engineering skills for Claude Code",
+  "owner": {
+    "name": "jamestjsp"
+  },
   "plugins": [
     {
       "name": "control-skills",
+      "source": ".",
       "description": "SLICOT routines, control theory, and PID tuning skills",
-      "version": "1.0.0",
-      "path": "."
+      "version": "1.0.0"
     }
   ]
 }
