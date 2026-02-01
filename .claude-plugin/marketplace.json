@@ -6,7 +6,10 @@
   "plugins": [
     {
       "name": "control-skills",
-      "source": "./",
+      "source": {
+        "type": "local",
+        "path": "./"
+      },
       "description": "SLICOT routines, control theory, and PID tuning skills",
       "version": "1.0.0"
     }
