@@ -3,7 +3,7 @@
 Digital PID Controller with Anti-windup
 
 Python implementation of the PID controller from the IFAC Computer Control paper
-(Listing 1), converted from Java. Uses slicot for control system integration.
+(Listing 1), converted from Java. Uses ctrlsys for control system integration.
 
 Reference:
     Wittenmark, B., Astrom, K.J., and Arzen, K.-E., "Computer Control: An Overview,"
@@ -14,7 +14,7 @@ Author: Converted from Java to Python
 
 import numpy as np
 from typing import Optional
-from slicot import ab04md
+from ctrlsys import ab04md
 
 
 class PIDController:
@@ -259,7 +259,7 @@ def simulate_pid_control(
     disturbance: Optional[np.ndarray] = None
 ) -> tuple:
     """
-    Simulate PID control of a plant using slicot.
+    Simulate PID control of a plant using ctrlsys.
 
     Parameters
     ----------

@@ -29,7 +29,7 @@ Matrix Input Format:
 import sys
 import argparse
 import numpy as np
-from slicot import sb02md, ab04md
+from ctrlsys import sb02md, ab04md
 
 
 def parse_matrix(matrix_str, rows, cols):
@@ -207,7 +207,7 @@ def plot_results(sys_matrices, K, dt=None):
     """Plot step response and closed-loop dynamics."""
     try:
         import matplotlib.pyplot as plt
-        from slicot import tf01md
+        from ctrlsys import tf01md
 
         A, B, C, D = sys_matrices
         n = A.shape[0]

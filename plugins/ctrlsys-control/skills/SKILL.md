@@ -1,11 +1,11 @@
 ---
-name: slicot-control
-description: This skill should be used when the user asks about SLICOT routines, control theory functions, LQR design, Riccati solvers, Kalman filtering, system identification, or needs to find the right SLICOT routine for a control systems task.
+name: ctrlsys-control
+description: This skill should be used when the user asks about ctrlsys routines, control theory functions, LQR design, Riccati solvers, Kalman filtering, system identification, or needs to find the right ctrlsys routine for a control systems task.
 ---
 
-# SLICOT Control Theory Library
+# ctrlsys Control Theory Library
 
-C11 translation of SLICOT (Subroutine Library In COntrol Theory) with Python bindings.
+C11 control systems library with Python bindings, published as ctrlsys on PyPI.
 
 ## Naming Convention
 
@@ -16,10 +16,10 @@ Routines follow `XX##YY` pattern:
 
 ## Looking Up Routine Details
 
-To get detailed documentation for any SLICOT routine, use Python's help function:
+To get detailed documentation for any ctrlsys routine, use Python's help function:
 ```python
-import slicot
-help(slicot.sb02md)  # Full docstring with params, returns, examples
+import ctrlsys
+help(ctrlsys.sb02md)  # Full docstring with params, returns, examples
 ```
 
 ## Category Quick Reference
@@ -114,7 +114,7 @@ A = np.array([[1, 2], [3, 4]], dtype=float, order='F')
 ```
 
 ### In-Place Array Modification Warning
-**IMPORTANT:** SLICOT functions may modify input arrays in-place. Always pass copies if you need to preserve originals:
+**IMPORTANT:** ctrlsys functions may modify input arrays in-place. Always pass copies if you need to preserve originals:
 ```python
 # BAD - A, B, C, D may be corrupted after call
 A_d, B_d, C_d, D_d, info = ab04md('C', A, B, C, D, alpha=1.0, beta=2.0/dt)
@@ -122,7 +122,7 @@ A_d, B_d, C_d, D_d, info = ab04md('C', A, B, C, D, alpha=1.0, beta=2.0/dt)
 # GOOD - originals preserved
 A_d, B_d, C_d, D_d, info = ab04md('C', A.copy(), B.copy(), C.copy(), D.copy(), alpha=1.0, beta=2.0/dt)
 ```
-This applies to most SLICOT routines including `ab04md`, `sb02md`, `tb05ad`, etc.
+This applies to most ctrlsys routines including `ab04md`, `sb02md`, `tb05ad`, etc.
 
 ### Info Codes
 - `info = 0` → Success
@@ -181,7 +181,7 @@ Common patterns in the 2-digit number:
 
 ## Resources
 
-- **Routine Details:** Use `help(slicot.routine_name)` in Python to get full docstring with parameters, return values, and examples
+- **Routine Details:** Use `help(ctrlsys.routine_name)` in Python to get full docstring with parameters, return values, and examples
 - **Tests:** `tests/python/test_*.py` (usage examples)
 
 See `references/` for detailed category info, workflows, and quick reference tables.

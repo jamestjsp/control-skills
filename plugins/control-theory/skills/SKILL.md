@@ -1,17 +1,17 @@
 ---
 name: control-theory
-description: Work with control theory problems, LTI systems, controller design, and system dynamics using slicot
+description: Work with control theory problems, LTI systems, controller design, and system dynamics using ctrlsys
 ---
 
-# Control Theory with SLICOT
+# Control Theory with ctrlsys
 
-This skill provides practical guidance for implementing and analyzing linear time-invariant (LTI) control systems using the slicot library (Python bindings for SLICOT), grounded in IFAC computer control principles.
+This skill provides practical guidance for implementing and analyzing linear time-invariant (LTI) control systems using the ctrlsys library, grounded in IFAC computer control principles.
 
 ## Purpose
 
-Control theory is fundamental to engineering systems from simple regulators to complex autonomous systems. This skill helps translate theoretical control concepts into practical implementations using slicot, covering system representations, analysis, design, and discretization.
+Control theory is fundamental to engineering systems from simple regulators to complex autonomous systems. This skill helps translate theoretical control concepts into practical implementations using ctrlsys, covering system representations, analysis, design, and discretization.
 
-**Key SLICOT routines used:**
+**Key ctrlsys routines used:**
 - `sb02md` - Riccati equation solver for LQR design
 - `ab04md` - Bilinear (Tustin) discretization
 - `tf01md` - Discrete-time state-space simulation
@@ -28,7 +28,7 @@ To apply this skill, first determine the control theory task:
 - **Simulation**: Time-domain and frequency-domain responses
 - **Learning**: Understanding IFAC computer control principles and best practices
 
-This skill activates when users request help with these domains using slicot, or when they need to understand the theoretical foundations of computer-controlled systems.
+This skill activates when users request help with these domains using ctrlsys, or when they need to understand the theoretical foundations of computer-controlled systems.
 
 ## How to Use This Skill
 
@@ -45,9 +45,9 @@ The scripts in `scripts/` provide working code patterns organized by functionali
 - `lqr_design.py` - LQR controller design using `sb02md`
 - `discretize_controller.py` - Discretization using `ab04md`
 - `analyze_system.py` - System analysis with frequency response via `tb05ad`
-- `pid_controller.py` - PID control simulation using slicot
+- `pid_controller.py` - PID control simulation using ctrlsys
 
-All arrays use Fortran column-major order (`order='F'` in NumPy) as required by SLICOT.
+All arrays use Fortran column-major order (`order='F'` in NumPy) as required by ctrlsys.
 
 ### Step 3: Understand Theoretical Foundations
 
@@ -75,9 +75,9 @@ When implementing control systems:
 5. Validate in simulation (step response, frequency response, closed-loop performance)
 6. Implement in real-time (account for quantization, saturation, numerical issues)
 
-## Key Concepts from SLICOT
+## Key Concepts from ctrlsys
 
-SLICOT works with state-space representation (A, B, C, D matrices) using raw numpy arrays:
+ctrlsys works with state-space representation (A, B, C, D matrices) using raw numpy arrays:
 
 ### State-Space Models
 - A, B, C, D matrix representation in Fortran column-major order
@@ -138,7 +138,7 @@ def tf_to_ss(num, den):
 Use `ab04md` for bilinear (Tustin) transformation:
 
 ```python
-from slicot import ab04md
+from ctrlsys import ab04md
 import numpy as np
 
 # Continuous state-space (A, B, C, D)
@@ -157,7 +157,7 @@ A_d, B_d, C_d, D_d, info = ab04md('C', A.copy(), B.copy(), C.copy(), D.copy(), a
 Standard Tustin causes frequency warping: ω_d = (2/dt)×tan(ω_c×dt/2). For PI/PID controllers, prewarp at the crossover frequency to preserve gain/phase margins:
 
 ```python
-from slicot import ab04md
+from ctrlsys import ab04md
 import numpy as np
 
 def tustin_prewarp(A, B, C, D, dt, wc):
@@ -194,7 +194,7 @@ A_d, B_d, C_d, D_d = tustin_prewarp(A_pi, B_pi, C_pi, D_pi, dt, wc)
 Use `sb02md` to solve the Riccati equation:
 
 ```python
-from slicot import sb02md, ab04md
+from ctrlsys import sb02md, ab04md
 import numpy as np
 
 # Continuous system
@@ -353,7 +353,7 @@ print(f"FOPDT model: {plant[0].shape[0]} states")
 Use `tb05ad` to compute frequency response and extract stability margins:
 
 ```python
-from slicot import tb05ad
+from ctrlsys import tb05ad
 import numpy as np
 
 def bode_margins(A, B, C, D, w_range=None):
@@ -439,10 +439,10 @@ if margins['gm'] is not None:
 
 ### Visualize Controller Performance
 
-After designing a controller, use slicot and matplotlib to analyze closed-loop performance:
+After designing a controller, use ctrlsys and matplotlib to analyze closed-loop performance:
 
 ```python
-from slicot import tf01md, ab04md, tb05ad
+from ctrlsys import tf01md, ab04md, tb05ad
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -527,8 +527,8 @@ This workflow demonstrates the complete design cycle:
 ## References and Standards
 
 - **IFAC Computer Control**: Comprehensive reference on computer-controlled systems, discretization, and practical implementation
-- **SLICOT Test Suite**: `tests/python/test_*.py` contains working examples for all routines
-- **SLICOT Documentation**: See `skills/slicot-control/SKILL.md` for routine reference
+- **ctrlsys test suite**: `tests/python/test_*.py` contains working examples for all routines
+- **ctrlsys documentation**: See `skills/ctrlsys-control/SKILL.md` for routine reference
 - **State-Space Theory**: Properties of A, B, C, D matrices and their interpretation in control design
 
 ## Tips for Success
@@ -537,5 +537,5 @@ This workflow demonstrates the complete design cycle:
 2. **Test controllability/observability**: Design only works on controllable/observable subsystems
 3. **Choose discretization carefully**: Use `ab04md` with Tustin for bandwidth-critical applications
 4. **Validate in simulation**: Always simulate step response using `tf01md`
-5. **Use Fortran column-major order**: All arrays must use `order='F'` for SLICOT
+5. **Use Fortran column-major order**: All arrays must use `order='F'` for ctrlsys
 6. **Account for implementation constraints**: Quantization, saturation, computational limits (see IFAC Ch. 11-12)

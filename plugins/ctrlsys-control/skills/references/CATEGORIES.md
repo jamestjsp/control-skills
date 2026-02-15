@@ -1,4 +1,4 @@
-# SLICOT Categories Reference
+# ctrlsys Categories Reference
 
 ## Analysis (AB, AG)
 

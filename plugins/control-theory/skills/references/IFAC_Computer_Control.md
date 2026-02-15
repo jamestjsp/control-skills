@@ -138,13 +138,13 @@ The computer-controlled system has slightly higher overshoot and the settling ti
 
 The example shows that it is straightforward to obtain an algorithm for computer control simply by writing the continuous-time control law as a differential equation and approximating the derivatives by differences. The example also indicates that the procedure seems to work well if the sampling period is sufficiently small. The overshoot and the settling time are, however, a little larger for the computer-controlled system, i.e. there is a deterioration due to the approximation.
 
-**Python Implementation using slicot:**
+**Python Implementation using ctrlsys:**
 
 ```python
 #!/usr/bin/env python3
-"""Disk-Drive Positioning System Example using slicot"""
+"""Disk-Drive Positioning System Example using ctrlsys"""
 import numpy as np
-from slicot import ab04md, tf01md
+from ctrlsys import ab04md, tf01md
 import matplotlib.pyplot as plt
 
 def tf_to_ss(num, den):
@@ -1094,13 +1094,13 @@ where β and γ are weighting factors (typically β = 1, γ = 0 to reduce oversh
 
 ### Computer Code
 
-**Python implementation of digital PID controller with anti-windup using slicot:**
+**Python implementation of digital PID controller with anti-windup using ctrlsys:**
 
 ```python
 #!/usr/bin/env python3
 """Digital PID Controller with anti-windup (converted from Java Listing 1)"""
 import numpy as np
-from slicot import ab04md
+from ctrlsys import ab04md
 
 def tf_to_ss(num, den):
     """Convert SISO transfer function to controllable canonical state-space."""
@@ -1192,7 +1192,7 @@ if __name__ == "__main__":
 2. **Anti-windup** using back-calculation method: `I += ar*(u_actual - u_computed)`
 3. **Setpoint weighting** (parameter b) to reduce overshoot
 4. **Filtered derivative** to reduce noise sensitivity
-5. **SLICOT integration** for plant simulation and control system design
+5. **ctrlsys integration** for plant simulation and control system design
 
 The complete implementation is available in `pid_controller.py` with additional features including bumpless parameter changes and comprehensive simulation capabilities.
 

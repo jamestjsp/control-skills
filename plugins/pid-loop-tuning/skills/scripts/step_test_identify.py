@@ -261,8 +261,8 @@ def fit_fopdt(time, pv, op, step_time, baseline_samples=None):
     }
 
 
-def fit_slicot(time, pv, op, Ts, step_time, order=1):
-    """Fit model using SLICOT subspace identification (OPTIONAL method).
+def fit_ctrlsys(time, pv, op, Ts, step_time, order=1):
+    """Fit model using ctrlsys subspace identification (OPTIONAL method).
 
     Uses ib01ad for preprocessing and ib01bd for state-space extraction.
     Converts discrete state-space to FOPDT parameters.
@@ -279,9 +279,9 @@ def fit_slicot(time, pv, op, Ts, step_time, order=1):
         dict with Kp, tau_p, Td, A, B, C, D matrices
     """
     try:
-        import slicot
+        import ctrlsys
     except ImportError:
-        raise ImportError("SLICOT not available. Use --method=regression instead.")
+        raise ImportError("ctrlsys not available. Use --method=regression instead.")
 
     mask_after = time >= step_time
     u = op[mask_after].reshape(-1, 1).copy(order='F')
@@ -294,19 +294,19 @@ def fit_slicot(time, pv, op, Ts, step_time, order=1):
     n = order
 
     try:
-        R, _ = slicot.ib01ad(
+        R, _ = ctrlsys.ib01ad(
             'M', 'N', 'C', 'N', 'N',
             nobr, m, l, N,
             u, y
         )
 
-        A, C, B, D, _ = slicot.ib01bd(
+        A, C, B, D, _ = ctrlsys.ib01bd(
             'M', 'C', 'N',
             nobr, n, m, l,
             R
         )
     except Exception as e:
-        raise RuntimeError(f"SLICOT identification failed: {e}")
+        raise RuntimeError(f"ctrlsys identification failed: {e}")
 
     if n == 1 and A.size == 1:
         a = A[0, 0]
@@ -350,7 +350,7 @@ def fit_slicot(time, pv, op, Ts, step_time, order=1):
         'C': C,
         'D': D,
         'delta_op': delta_op,
-        'method': 'slicot'
+        'method': 'ctrlsys'
     }
 
 
@@ -490,9 +490,9 @@ Examples:
   uv run scripts/step_test_identify.py data.csv --step-time 100 \\
       --pv-range 0 200 --op-range 0 100
 
-  # Use SLICOT subspace ID (optional, for higher-order systems)
+  # Use ctrlsys subspace ID (optional, for higher-order systems)
   uv run scripts/step_test_identify.py data.csv --step-time 100 \\
-      --pv-range 0 200 --op-range 0 100 --method slicot
+      --pv-range 0 200 --op-range 0 100 --method ctrlsys
 """
     )
 
@@ -503,7 +503,7 @@ Examples:
                         help='PV range in engineering units (default: auto from data)')
     parser.add_argument('--op-range', nargs=2, type=float, metavar=('MIN', 'MAX'),
                         help='OP range in engineering units (default: 0 100)')
-    parser.add_argument('--method', choices=['regression', 'slicot'], default='regression',
+    parser.add_argument('--method', choices=['regression', 'ctrlsys'], default='regression',
                         help='Identification method (default: regression)')
     parser.add_argument('--detrend', action='store_true',
                         help='Remove baseline trend before fitting')
@@ -555,7 +555,7 @@ Examples:
     if args.method == 'regression':
         result = fit_fopdt(time, pv_pct, op_pct, step_time)
     else:
-        result = fit_slicot(time, pv_pct, op_pct, Ts, step_time)
+        result = fit_ctrlsys(time, pv_pct, op_pct, Ts, step_time)
 
     print("=" * 60)
     print("FOPDT Identification Results")

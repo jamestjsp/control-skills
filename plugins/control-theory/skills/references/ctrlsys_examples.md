@@ -1,10 +1,10 @@
-# SLICOT Control Theory Code Examples
+# ctrlsys Control Theory Code Examples
 
-A practical reference of control theory code examples using SLICOT, the Subroutine Library In COntrol Theory.
+A practical reference of control theory code examples using ctrlsys, the Subroutine Library In COntrol Theory.
 
 ## 1. State-Space Representation
 
-SLICOT works with state-space representations. Transfer functions must be converted to state-space form.
+ctrlsys works with state-space representations. Transfer functions must be converted to state-space form.
 
 ### State-Space Arrays
 
@@ -119,7 +119,7 @@ print(f"DC Gain: {gain}")
 
 ```python
 import numpy as np
-from slicot import tb05ad
+from ctrlsys import tb05ad
 
 A = np.array([[0, 1], [-4, -5]], order='F', dtype=float)
 B = np.array([[0], [1]], order='F', dtype=float)
@@ -164,7 +164,7 @@ plt.tight_layout()
 
 ```python
 import numpy as np
-from slicot import ab04md
+from ctrlsys import ab04md
 
 def discretize_tustin(A, B, C, D, dt):
     """Discretize continuous system using Tustin transformation.
@@ -203,7 +203,7 @@ print(f"Discrete poles: {np.linalg.eigvals(A_d)}")
 
 ```python
 import numpy as np
-from slicot import ab04md
+from ctrlsys import ab04md
 
 def discretize_tustin_prewarp(A, B, C, D, dt, prewarp_freq):
     """Discretize with Tustin and frequency prewarping.
@@ -241,7 +241,7 @@ A_d, B_d, C_d, D_d = discretize_tustin_prewarp(A, B, C, D, dt=0.5, prewarp_freq=
 
 ```python
 import numpy as np
-from slicot import ab04md
+from ctrlsys import ab04md
 
 def undiscretize_tustin(A_d, B_d, C_d, D_d, dt):
     """Convert discrete system back to continuous using inverse Tustin."""
@@ -268,7 +268,7 @@ def undiscretize_tustin(A_d, B_d, C_d, D_d, dt):
 
 ```python
 import numpy as np
-from slicot import tf01md, ab04md
+from ctrlsys import tf01md, ab04md
 
 def simulate_step_response(A, B, C, D, t_final=10.0, dt=0.01):
     """Simulate step response of a continuous system.
@@ -323,7 +323,7 @@ plt.grid(True, alpha=0.3)
 
 ```python
 import numpy as np
-from slicot import tf01md
+from ctrlsys import tf01md
 
 def simulate_system(A_d, B_d, C_d, D_d, u, x0=None):
     """Simulate discrete system with arbitrary input.
@@ -365,7 +365,7 @@ y, x_final = simulate_system(A_d, B_d, C_d, D_d, u, x0)
 
 ```python
 import numpy as np
-from slicot import sb02md
+from ctrlsys import sb02md
 
 def lqr_continuous(A, B, Q, R):
     """Solve continuous-time LQR problem.
@@ -416,7 +416,7 @@ print(f"Closed-loop poles: {poles}")
 
 ```python
 import numpy as np
-from slicot import sb02md
+from ctrlsys import sb02md
 
 def lqr_discrete(A, B, Q, R):
     """Solve discrete-time LQR problem.
@@ -622,7 +622,7 @@ print(f"Eigenvalues (roots): {np.linalg.eigvals(A)}")
 #!/usr/bin/env python3
 """Complete LQR design example for a DC motor system."""
 import numpy as np
-from slicot import ab04md, sb02md, tf01md, tb05ad
+from ctrlsys import ab04md, sb02md, tf01md, tb05ad
 
 # DC Motor model: theta'' + 10*theta' = 100*u
 # State: x = [theta, theta']
@@ -675,7 +675,7 @@ plt.grid(True, alpha=0.3)
 plt.show()
 ```
 
-This reference covers the main control theory operations using SLICOT. Key patterns:
+This reference covers the main control theory operations using ctrlsys. Key patterns:
 
 - **State-space**: Use NumPy arrays with Fortran order (`order='F'`)
 - **Transfer functions**: Convert to state-space using `tf_to_ss()` helper

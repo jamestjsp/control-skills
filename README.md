@@ -1,12 +1,12 @@
 # control-skills
 
-Claude Code plugin for control systems engineering with SLICOT.
+Claude Code plugin for control systems engineering with ctrlsys.
 
 ## Skills Included
 
 | Skill | Description |
 |-------|-------------|
-| `slicot-control` | SLICOT routine lookup and usage guidance |
+| `ctrlsys-control` | ctrlsys routine lookup and usage guidance |
 | `control-theory` | LTI systems, controller design, discretization |
 | `pid-loop-tuning` | Process identification and lambda tuning |
 
@@ -35,7 +35,7 @@ claude --plugin-dir /path/to/control-skills
 After installation, invoke skills with:
 
 ```
-/control-skills:slicot-control   # Find SLICOT routines
+/control-skills:ctrlsys-control   # Find ctrlsys routines
 /control-skills:control-theory   # LTI system design
 /control-skills:pid-loop-tuning  # PID tuning methodology
 ```
@@ -53,16 +53,16 @@ After installation, invoke skills with:
 
 ## Requirements
 
-### slicot package
+### ctrlsys package
 
-**Important:** This uses `slicot` (C11 rewrite), NOT `slycot` (Fortran wrapper). They have different APIs.
+**Important:** This uses `ctrlsys` (C11 rewrite), NOT `slycot` (Fortran wrapper). They have different APIs.
 
 ```bash
 # Using uv
-uv add slicot
+uv add ctrlsys
 
 # Using pip
-pip install slicot
+pip install ctrlsys
 ```
 
 ### numpy

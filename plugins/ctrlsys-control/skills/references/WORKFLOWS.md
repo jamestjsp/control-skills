@@ -1,4 +1,4 @@
-# SLICOT Workflows
+# ctrlsys Workflows
 
 ## 1. LQR Controller Design
 
@@ -6,7 +6,7 @@ Solve continuous-time algebraic Riccati equation for optimal state feedback.
 
 ```python
 import numpy as np
-from slicot import sb02md
+from ctrlsys import sb02md
 
 n = 2
 A = np.array([[0, 1], [-2, -3]], dtype=float, order='F')
@@ -38,7 +38,7 @@ Assign closed-loop eigenvalues using state feedback.
 
 ```python
 import numpy as np
-from slicot import sb01bd
+from ctrlsys import sb01bd
 
 n, m = 3, 1
 A = np.array([[0, 1, 0], [0, 0, 1], [-6, -11, -6]], dtype=float, order='F')
@@ -65,7 +65,7 @@ Reduce system order using Hankel-norm approximation.
 
 ```python
 import numpy as np
-from slicot import ab09ad
+from ctrlsys import ab09ad
 
 n, m, p = 6, 1, 1
 # Assume A, B, C, D are defined (order n system)
@@ -94,7 +94,7 @@ Estimate state-space model from input-output data.
 
 ```python
 import numpy as np
-from slicot import ib01ad, ib01bd
+from ctrlsys import ib01ad, ib01bd
 
 # Input-output data: u (nsmp x m), y (nsmp x l)
 nsmp, m, l = 1000, 1, 1
@@ -129,7 +129,7 @@ Design H-infinity optimal controller.
 
 ```python
 import numpy as np
-from slicot import sb10ad
+from ctrlsys import sb10ad
 
 # Generalized plant P partitioned as:
 #   [A  | B1  B2 ]
@@ -164,7 +164,7 @@ Verify controllability and find controllable realization.
 
 ```python
 import numpy as np
-from slicot import ab01nd
+from ctrlsys import ab01nd
 
 n, m = 4, 2
 A = ...  # n x n
@@ -189,7 +189,7 @@ Bilinear (Tustin) transformation.
 
 ```python
 import numpy as np
-from slicot import ab04md
+from ctrlsys import ab04md
 
 n, m, p = 2, 1, 1
 Ts = 0.1  # sampling time
@@ -216,7 +216,7 @@ Solve A'X + XA + Q = 0 (or discrete variant).
 
 ```python
 import numpy as np
-from slicot import sb03md
+from ctrlsys import sb03md
 
 n = 3
 A = np.array([[-1, 0.5, 0], [0, -2, 0.5], [0, 0, -3]], dtype=float, order='F')

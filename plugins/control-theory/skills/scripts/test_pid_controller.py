@@ -15,7 +15,7 @@ Tests cover:
 
 import numpy as np
 from pid_controller import PIDController, simulate_pid_control, tf_to_ss
-from slicot import ab04md
+from ctrlsys import ab04md
 
 
 def test_pid_initialization():

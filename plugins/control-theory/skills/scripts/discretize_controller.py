@@ -19,7 +19,7 @@ Examples:
 import sys
 import argparse
 import numpy as np
-from slicot import ab04md, tf01md, tb05ad
+from ctrlsys import ab04md, tf01md, tb05ad
 
 
 def parse_polynomial(poly_str):

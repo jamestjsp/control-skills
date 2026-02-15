@@ -8,10 +8,10 @@
   },
   "plugins": [
     {
-      "name": "slicot-control",
-      "description": "SLICOT routine lookup and usage guidance",
+      "name": "ctrlsys-control",
+      "description": "ctrlsys routine lookup and usage guidance",
       "version": "1.0.0",
-      "source": "./plugins/slicot-control",
+      "source": "./plugins/ctrlsys-control",
       "category": "development"
     },
     {

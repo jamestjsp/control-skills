@@ -163,7 +163,7 @@ y(t) = 0                                 for t < Td
 - Model mismatch compensated by conservative λ choice
 
 **For Higher-Order Systems:**
-Use `--method=slicot` with `step_test_identify.py` for subspace identification. However, FOPDT with conservative λ typically works well even for complex processes.
+Use `--method=ctrlsys` with `step_test_identify.py` for subspace identification. However, FOPDT with conservative λ typically works well even for complex processes.
 
 ## Self-Regulating Process Modeling
 

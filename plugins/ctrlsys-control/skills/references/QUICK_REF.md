@@ -1,4 +1,4 @@
-# SLICOT Quick Reference
+# ctrlsys Quick Reference
 
 ## Task-to-Routine Tables
 

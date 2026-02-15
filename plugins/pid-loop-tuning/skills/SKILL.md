@@ -9,7 +9,7 @@ Transform PID tuning from guesswork into a structured, repeatable engineering di
 
 ## About This Skill
 
-This skill provides practical PID tuning guidance grounded in industrial control engineering. The interactive tools use **slicot** (SLICOT control systems library with Python bindings) for:
+This skill provides practical PID tuning guidance grounded in industrial control engineering. The interactive tools use **ctrlsys** (control systems library with Python bindings) for:
 
 - State-space representation and analysis
 - Frequency domain analysis (Bode plots, poles/zeros) via `tb05ad`
@@ -17,7 +17,7 @@ This skill provides practical PID tuning guidance grounded in industrial control
 - Controller discretization for embedded deployment via `ab04md`
 - Step response simulation via `tf01md`
 
-SLICOT provides industrial-strength numerical routines for control system analysis with raw numpy arrays in Fortran column-major order.
+ctrlsys provides industrial-strength numerical routines for control system analysis with raw numpy arrays in Fortran column-major order.
 
 ## The Four-Step Methodology
 
@@ -64,7 +64,7 @@ This produces a dimensionless gain suitable for direct use in lambda tuning form
 
 **Identification Methods:**
 - `--method=regression` (DEFAULT): Nonlinear least squares FOPDT fit with R² and RMSE metrics
-- `--method=slicot`: SLICOT subspace ID (`ib01ad`/`ib01bd`) for higher-order systems
+- `--method=ctrlsys`: ctrlsys subspace ID (`ib01ad`/`ib01bd`) for higher-order systems
 
 See [Process Identification](references/01_process_identification.md) for detailed procedures and CSV format documentation.
 
@@ -253,8 +253,8 @@ print(f"Parallel: Kp={Kp:.3f}, Ki={Ki:.4f}, Kd={Kd}")
 ### Interactive Tools
 
 - **[Notebooks](notebooks/)** - Jupyter notebooks for iterative tuning workflows
-  - **pid_analysis_workflow.ipynb** - Complete control theory analysis using slicot: Bode plots, pole/zero analysis, frequency response, and discretization
-  - Uses: slicot for state-space analysis (`tf01md`, `ab04md`, `tb05ad`), numpy for arrays, matplotlib for visualization
+  - **pid_analysis_workflow.ipynb** - Complete control theory analysis using ctrlsys: Bode plots, pole/zero analysis, frequency response, and discretization
+  - Uses: ctrlsys for state-space analysis (`tf01md`, `ab04md`, `tb05ad`), numpy for arrays, matplotlib for visualization
   - Use for: Visual validation, frequency domain analysis, documenting tuning sessions, discretization for embedded deployment
 
 - **[Scripts](scripts/)** - Command-line calculation tools
