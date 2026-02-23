@@ -294,17 +294,29 @@ def fit_ctrlsys(time, pv, op, Ts, step_time, order=1):
     n = order
 
     try:
-        R, _ = ctrlsys.ib01ad(
-            'M', 'N', 'C', 'N', 'N',
-            nobr, m, l, N,
-            u, y
+        n_est, r, _sv, _iwarn, info = ctrlsys.ib01ad(
+            'M',    # MOESP method
+            'C',    # Cholesky algorithm
+            'N',    # no B,D via MOESP
+            'O',    # one batch
+            'N',    # no connection
+            'N',    # no control
+            nobr, m, l, u, y, 0.0, -1.0
         )
+        if info != 0:
+            raise RuntimeError(f"ib01ad info={info}")
 
-        A, C, B, D, _ = ctrlsys.ib01bd(
-            'M', 'C', 'N',
-            nobr, n, m, l,
-            R
+        if n is None or n < 1:
+            n = max(n_est, 1)
+
+        A, C, B, D, _Q, _Ry, _S, _K, _iwarn, info = ctrlsys.ib01bd(
+            'C',    # combined method
+            'A',    # all matrices
+            'N',    # no Kalman gain
+            nobr, n, m, l, N, r, 0.0
         )
+        if info != 0:
+            raise RuntimeError(f"ib01bd info={info}")
     except Exception as e:
         raise RuntimeError(f"ctrlsys identification failed: {e}")
 

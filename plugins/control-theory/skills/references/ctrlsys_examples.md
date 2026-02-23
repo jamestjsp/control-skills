@@ -1,6 +1,6 @@
 # ctrlsys Control Theory Code Examples
 
-A practical reference of control theory code examples using ctrlsys, the Subroutine Library In COntrol Theory.
+A practical reference of control theory code examples using ctrlsys, a C11 control systems library with Python bindings.
 
 ## 1. State-Space Representation
 
@@ -102,16 +102,23 @@ print(f"Stable (continuous): {is_stable_continuous}")
 ```python
 import numpy as np
 
-def dc_gain(A, B, C, D):
-    """Compute DC gain (steady-state gain) of a system."""
+def dc_gain_continuous(A, B, C, D):
+    """Compute DC gain G(0) = C*(-A)^{-1}*B + D for continuous system."""
     n = A.shape[0]
     if n == 0:
         return D
-    return C @ np.linalg.solve(np.eye(n) - A, -B) + D
+    return -C @ np.linalg.solve(A, B) + D
+
+def dc_gain_discrete(A, B, C, D):
+    """Compute DC gain G(1) = C*(I-A)^{-1}*B + D for discrete system."""
+    n = A.shape[0]
+    if n == 0:
+        return D
+    return C @ np.linalg.solve(np.eye(n) - A, B) + D
 
 # For transfer function G(s), DC gain = G(0) = lim_{s->0} G(s)
 A, B, C, D = tf_to_ss([100], [1, 10, 100])
-gain = dc_gain(A, B, C, D)
+gain = dc_gain_continuous(A, B, C, D)
 print(f"DC Gain: {gain}")
 ```
 
@@ -270,13 +277,14 @@ def undiscretize_tustin(A_d, B_d, C_d, D_d, dt):
 import numpy as np
 from ctrlsys import tf01md, ab04md
 
-def simulate_step_response(A, B, C, D, t_final=10.0, dt=0.01):
-    """Simulate step response of a continuous system.
+def simulate_step_response(A, B, C, D, t_final=10.0, dt=0.01, continuous=True):
+    """Simulate step response of a system.
 
     Args:
-        A, B, C, D: State-space matrices (continuous or discrete)
+        A, B, C, D: State-space matrices
         t_final: Simulation duration
         dt: Time step for simulation
+        continuous: True if system is continuous (will be discretized)
 
     Returns:
         t: Time vector
@@ -286,9 +294,7 @@ def simulate_step_response(A, B, C, D, t_final=10.0, dt=0.01):
     n_steps = int(t_final / dt)
     t = np.arange(n_steps) * dt
 
-    # Discretize if continuous (check stability)
-    poles = np.linalg.eigvals(A) if n > 0 else np.array([])
-    if n > 0 and np.any(poles.real < 0):  # Likely continuous
+    if continuous and n > 0:
         A_d, B_d, C_d, D_d, _ = ab04md('C',
             np.asfortranarray(A.copy()),
             np.asfortranarray(B.copy()),
@@ -298,7 +304,6 @@ def simulate_step_response(A, B, C, D, t_final=10.0, dt=0.01):
     else:
         A_d, B_d, C_d, D_d = A, B, C, D
 
-    # Unit step input
     n_inputs = B.shape[1]
     u = np.ones((n_inputs, n_steps), order='F', dtype=float)
     x0 = np.zeros(n, dtype=float)
@@ -451,7 +456,7 @@ def lqr_discrete(A, B, Q, R):
     K = np.linalg.inv(R + B.T @ X @ B) @ B.T @ X @ A
     poles = wr[:n] + 1j * wi[:n]
 
-    return K, P, poles
+    return K, X, poles
 
 # Example
 A_d = np.array([[1, 0.1], [0, 1]], order='F', dtype=float)

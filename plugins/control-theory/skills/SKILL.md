@@ -368,13 +368,11 @@ def bode_margins(A, B, C, D, w_range=None):
                    wcg (gain crossover freq), wcp (phase crossover freq)
     """
     if w_range is None:
-        # Auto-range from eigenvalues
         eigvals = np.linalg.eigvals(A)
         w_max = max(10, 10 * np.max(np.abs(eigvals)))
         w_min = w_max / 1000
         w_range = [w_min, w_max]
 
-    # Logarithmic frequency sweep
     w = np.logspace(np.log10(w_range[0]), np.log10(w_range[1]), 500)
 
     mag = np.zeros(len(w))
@@ -387,8 +385,9 @@ def bode_margins(A, B, C, D, w_range=None):
         )
         if info != 0:
             continue
-        mag[i] = np.abs(g[0, 0])
-        phase[i] = np.angle(g[0, 0]) * 180 / np.pi
+        H = g[0, 0] + D[0, 0]  # tb05ad returns C(sI-A)^{-1}B, must add D
+        mag[i] = np.abs(H)
+        phase[i] = np.angle(H) * 180 / np.pi
 
     # Unwrap phase
     phase = np.unwrap(phase * np.pi / 180) * 180 / np.pi
@@ -527,8 +526,7 @@ This workflow demonstrates the complete design cycle:
 ## References and Standards
 
 - **IFAC Computer Control**: Comprehensive reference on computer-controlled systems, discretization, and practical implementation
-- **ctrlsys test suite**: `tests/python/test_*.py` contains working examples for all routines
-- **ctrlsys documentation**: See `skills/ctrlsys-control/SKILL.md` for routine reference
+- **ctrlsys routine reference**: Use `help(ctrlsys.routine_name)` for full docstrings
 - **State-Space Theory**: Properties of A, B, C, D matrices and their interpretation in control design
 
 ## Tips for Success
