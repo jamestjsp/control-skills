@@ -6,9 +6,12 @@
 | Equation | Routine | Notes |
 |----------|---------|-------|
 | Riccati (ARE) | `sb02md` | Continuous/discrete |
+| Riccati (generalized) | `sg02ad` | Descriptor systems |
+| Optimal gain | `sb02od` | State feedback via Riccati |
 | Lyapunov | `sb03md` | A'X + XA + Q = 0 |
 | Sylvester | `sb04md` | AX + XB = C |
-| Stein | `sb03md` | DICO='D' |
+| Stein (discrete Lyapunov) | `sb03md` | DICO='D' |
+| Generalized Lyapunov | `sg03ad` | Descriptor systems |
 
 ### System Operations
 | Operation | Routine |
@@ -29,9 +32,11 @@
 ### Norms
 | Norm | Routine |
 |------|---------|
-| H-infinity | `ab13md` |
+| H-infinity (general) | `ab13dd` |
+| H-infinity (continuous, stable) | `ab13cd` |
 | H2 | `ab13bd` |
 | Hankel | `ab13ad` |
+| Structured singular value (mu) | `ab13md` |
 
 ## Parameter Conventions
 

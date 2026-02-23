@@ -68,9 +68,12 @@ help(ctrlsys.sb02md)  # Full docstring with params, returns, examples
 | Observability | `ab01od` | Staircase form reduction |
 | System zeros | `ab08nd` | Transmission zeros |
 | Stability check | `ab09jx` | Stable/antistable decomposition |
-| H-infinity norm | `ab13md` | Compute ‖G‖∞ |
+| H-infinity norm | `ab13dd` | Compute ‖G‖∞ (L-infinity norm) |
+| H-infinity norm (continuous, stable) | `ab13cd` | Compute ‖G‖∞ via bisection |
 | H2 norm | `ab13bd` | Compute ‖G‖₂ |
 | Hankel norm | `ab13ad` | Compute Hankel singular values |
+| Structured singular value (mu) | `ab13md` | Upper bound on mu |
+| Stability radius | `ab13ed` | Distance to instability |
 
 ### Model Reduction
 | Task | Routine | Description |
@@ -86,6 +89,8 @@ help(ctrlsys.sb02md)  # Full docstring with params, returns, examples
 | Equation | Routine | Description |
 |----------|---------|-------------|
 | Riccati (ARE) | `sb02md` | A'X + XA - XGX + Q = 0 |
+| Riccati (generalized) | `sg02ad` | Generalized ARE for descriptor systems |
+| Optimal gain | `sb02od` | Optimal state feedback via Riccati |
 | Lyapunov | `sb03md` | A'X + XA + Q = 0 |
 | Sylvester | `sb04md` | AX + XB = C |
 | Generalized Lyapunov | `sg03ad` | A'XE + E'XA + Q = 0 |
@@ -94,8 +99,11 @@ help(ctrlsys.sb02md)  # Full docstring with params, returns, examples
 | Task | Routine | Description |
 |------|---------|-------------|
 | Continuous ↔ Discrete | `ab04md` | Bilinear transformation |
-| State-space ↔ Transfer | `tb04ad` | SS to transfer function |
+| State-space → Transfer fn | `tb04ad` | SS to transfer function |
+| Transfer fn → State-space | `tc04ad` | Transfer function to SS |
 | Minimal realization | `tb01pd` | Remove uncontrollable/unobservable |
+| Frequency response (SS) | `tb05ad` | G(jw) from state-space |
+| Frequency response (TF) | `td05ad` | G(jw) from transfer function |
 
 ### System Identification
 | Task | Routine | Description |
@@ -145,12 +153,12 @@ This applies to most ctrlsys routines including `ab04md`, `sb02md`, `tb05ad`, et
 
 ## Type Aliases
 
-| Type | Size | Fortran Equivalent |
-|------|------|-------------------|
-| `i32` | 32-bit int | INTEGER |
-| `i64` | 64-bit int | INTEGER*8 |
-| `f64` | 64-bit float | DOUBLE PRECISION |
-| `c128` | 128-bit complex | COMPLEX*16 |
+| Type | Size | C Equivalent |
+|------|------|----|
+| `i32` | 32-bit int | `int32_t` |
+| `i64` | 64-bit int | `int64_t` |
+| `f64` | 64-bit float | `double` |
+| `c128` | 128-bit complex | `double _Complex` |
 
 ## Subcategory Numbers
 
@@ -181,7 +189,7 @@ Common patterns in the 2-digit number:
 
 ## Resources
 
-- **Routine Details:** Use `help(ctrlsys.routine_name)` in Python to get full docstring with parameters, return values, and examples
-- **Tests:** `tests/python/test_*.py` (usage examples)
+- **Routine Details:** Use `help(ctrlsys.routine_name)` in Python for full docstring
+- **Install:** `uv add ctrlsys` or `pip install ctrlsys`
 
 See `references/` for detailed category info, workflows, and quick reference tables.

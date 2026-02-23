@@ -19,7 +19,15 @@
 | `ab09cd` | Frequency-weighted balanced reduction |
 | `ab09fd` | Coprime factorization reduction |
 | `ab09md` | Singular perturbation approximation |
-| `ab13md` | H-infinity norm |
+| `ab13ad` | Hankel singular values / Hankel norm |
+| `ab13bd` | H2/L2 norm of transfer function |
+| `ab13cd` | H-infinity norm (continuous, stable) |
+| `ab13dd` | L-infinity norm (continuous/discrete) |
+| `ab13ed` | Distance to instability (stability radius) |
+| `ab13fd` | Complex stability radius (SVD-based) |
+| `ab13hd` | L-infinity norm (descriptor systems) |
+| `ab13id` | Check properness of descriptor transfer function |
+| `ab13md` | Structured singular value (mu) upper bound |
 
 ### AG - Generalized State-Space
 | Routine | Description |
@@ -48,10 +56,19 @@
 | `sb10fd` | H-infinity optimal controller |
 | `sb10hd` | Discrete H-inf (gamma iteration) |
 
+### SB16 - Controller Reduction
+| Routine | Description |
+|---------|-------------|
+| `sb16ad` | Frequency-weighted controller reduction via balancing |
+| `sb16bd` | Coprime factorization state feedback controller reduction |
+| `sb16cd` | Frequency-weighted coprime factorization controller reduction |
+
 ### SG - Generalized Synthesis
 Descriptor system synthesis routines.
 | Routine | Description |
 |---------|-------------|
+| `sg02ad` | Generalized algebraic Riccati equation (descriptor) |
+| `sg02nd` | Optimal gain for generalized Riccati problems |
 | `sg03ad` | Generalized Lyapunov equation |
 | `sg03bd` | Cholesky factor of generalized Lyapunov |
 
@@ -76,6 +93,7 @@ Descriptor system synthesis routines.
 | `tb01td` | Balance state-space system |
 | `tb01ud` | Schur form reduction |
 | `tb01wd` | Hessenberg form |
+| `tb05ad` | Frequency response matrix from state-space |
 
 ### TC - Polynomial/Transfer
 | Routine | Description |
@@ -91,10 +109,15 @@ Descriptor system synthesis routines.
 | `td04ad` | Polynomial to state-space (column form) |
 | `td05ad` | Frequency response from transfer fn |
 
-### TF - Frequency Response
+### TF - Frequency Response / Markov Parameters
 | Routine | Description |
 |---------|-------------|
 | `tf01md` | Output sequence from state-space |
+| `tf01nd` | Output response (Hessenberg state matrix) |
+| `tf01od` | Block Hankel expansion |
+| `tf01pd` | Block Toeplitz expansion |
+| `tf01qd` | Markov parameters from transfer function |
+| `tf01rd` | Markov parameters from state-space |
 
 ## Matrix (MB, MC, MA, MD)
 
@@ -131,13 +154,16 @@ Descriptor system synthesis routines.
 | `ma02bd` | Reverse rows/columns |
 | `ma02ed` | Skew-symmetric matrix operations |
 
-### MD - Matrix Decomposition
+### MD - Matrix Decomposition / Optimization
 | Routine | Description |
 |---------|-------------|
-| `md03by` | Rank-revealing QR |
-| `md03bz` | Complex rank-revealing QR |
+| `md03ba` | QR factorization with column pivoting (Levenberg-Marquardt) |
+| `md03bb` | Levenberg-Marquardt parameter (compressed Jacobian) |
+| `md03bd` | Levenberg-Marquardt nonlinear least squares optimizer |
+| `md03bf` | Kowalik-Osborne test function |
+| `md03by` | Levenberg-Marquardt parameter (trust region) |
 
-## Identification (IB, NF)
+## Identification (IB, IB03, NF)
 
 ### IB - Subspace Identification
 | Routine | Description |
@@ -151,22 +177,30 @@ Descriptor system synthesis routines.
 | `ib01pd` | Compute system matrices |
 | `ib01rd` | Residuals and covariances |
 
-### NF - Nonlinear Filtering
+### IB03 - Wiener System Identification
 | Routine | Description |
 |---------|-------------|
-| `nf01ad` | Levenberg-Marquardt for nonlinear LS |
-| `nf01bd` | Nonlinear system simulation |
-| `nf01bp` | Jacobian matrix computation |
-| `nf01bs` | Forward pass of Wiener system |
+| `ib03ad` | Wiener system identification (algorithm selection) |
+| `ib03bd` | Wiener system identification (Levenberg-Marquardt) |
+
+### NF - Nonlinear/Neural Network
+| Routine | Description |
+|---------|-------------|
+| `nf01ay` | Neural network output computation |
+| `nf01br` | Solve linear equations in least squares sense |
+| `nf01bs` | QR factorization of Jacobian (compressed form) |
+| `nf01by` | Jacobian of neural network error function |
 
 ## Filter (FB, FD)
 
 ### FB - Kalman Filtering
 | Routine | Description |
 |---------|-------------|
-| `fb01qd` | One step Kalman filter (square root) |
+| `fb01qd` | Square root covariance Kalman filter (one step) |
 | `fb01rd` | Time update (conventional) |
 | `fb01sd` | Measurement update |
+| `fb01td` | Square root information Kalman filter (controller Hessenberg) |
+| `fb01vd` | Conventional Kalman filter (one recursion) |
 
 ### FD - Filter Design
 | Routine | Description |
