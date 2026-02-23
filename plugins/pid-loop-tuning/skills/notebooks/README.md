@@ -263,7 +263,7 @@ uv pip install --upgrade control
 - **[SKILL.md](../SKILL.md)** - Main PID tuning methodology
 - **[Lambda Tuning](../reference/03_lambda_tuning.md)** - Tuning calculations explained
 - **[Scripts](../scripts/)** - Command-line tools for quick calculations
-- **[python-control docs](https://python-control.readthedocs.io/)** - Control package documentation
+- **ctrlsys docs**: Use `help(ctrlsys.routine_name)` in Python for full docstrings
 
 ## Contributing Notebooks
 
